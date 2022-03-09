@@ -1,0 +1,20 @@
+- name: Install Ansible Automation Platform 2.1 
+  hosts: all
+
+  roles:
+    - role: rh_aap_deployment
+      vars:
+        aap_installation_url: 
+        aap_automation_controllers:
+        aap_execution_nodes:
+        aap_hop_nodes:
+        aap_pg_database:
+        aap_pg_username:
+        aap_pg_password:
+        aap_pg_host:
+        aap_pg_port:
+        aap_registry_username:
+        aap_registry_password:
+        aap_controller_cert_path:
+        aap_controller_cert_path:
+
