@@ -1,0 +1,12 @@
+---
+- name: "Check Prerequisites"
+  import_tasks: prerequisites.yml
+  tags: [prerequisites]
+
+- name: "Install Requirements"
+  import_tasks: requirements.yml
+  tags: [requirements]
+
+- name: "Deployment"
+  import_tasks: deployment.yml
+  tags: [deployment]

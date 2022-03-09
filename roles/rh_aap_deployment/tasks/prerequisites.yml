@@ -1,0 +1,19 @@
+- name: Check if there is enough space
+  assert:
+    that: 
+  when: "'automationcontroller' in group_names or 'automationhub' in group_names"
+
+- block:
+
+  - name: Extend var ({{ aap_vg_name }}/{{ aap_lv_name }})
+    community.general.lvol:
+      vg: "{{ aap_vg_var_name }}"
+      lv: "{{ aap_lv_var_name }}"
+      size: "{{ aap_controller_disk_space }}"
+
+  - name: Grow var filesystem
+    shell: xfs_growfs /dev/{{ aap_vg_name }}/{{ aap_lv_name }}
+  
+  when:
+    - (ansible_mounts|selectattr("mount", "equalto", "/var")|list)[0].size_available > {{ aap_controller_disk_space }}
+    - "'automationcontroller' in group_names or 'automationhub' in group_names"

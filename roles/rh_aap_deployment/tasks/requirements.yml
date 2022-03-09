@@ -1,0 +1,7 @@
+- name: Attaching your Red Hat Ansible Automation Platform subscription
+  ommunity.general.redhat_subscription:
+    state: present
+    username: "{{ aap_rh_user }}"
+    password: "{{ aap_rh_password }}"
+    pool_ids: "{{ aap_rh_pool_id }}" 
+  when: "'automationhub' in group_names"

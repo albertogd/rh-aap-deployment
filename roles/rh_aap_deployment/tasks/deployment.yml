@@ -1,0 +1,35 @@
+- block:
+  
+  - name: Create installation folder
+    file:
+      path: "{{ app_installation_dir }}"
+      state: directory
+      owner: "{{ lookup('env', 'USER') }}"
+      mode: '0755'
+    become: true
+  
+  - name: Download Ansible Automation Platform
+    unarchive:
+      src: "{{ aap_installation_url }}"
+      remote_src: true
+      dest: "{{ app_installation_dir }}"
+
+  - name: Generate Inventory from template
+    template:
+      src: inventory.j2
+      dest: "{{ app_installation_dir }}/inventory"
+
+  - name: Create certificate folder
+    file:
+      path: "{{ app_installation_dir }}/certificates"
+      state: directory
+      mode: '0755'
+
+  - name: Setup
+    shell:
+      cmd: ./setup.sh
+      args:
+        chdir: "{{ app_installation_dir }}"
+     
+  delegate_to: localhost
+  run_once: true

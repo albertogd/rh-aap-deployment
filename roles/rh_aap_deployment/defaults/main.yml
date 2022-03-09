@@ -1,0 +1,5 @@
+---
+aap_installation_dir: "/opt/aap"
+aap_controller_disk_space: 40
+aap_vg_var_name: vg_root
+aap_lv_var_name: var_lv
